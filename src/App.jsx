@@ -1,9 +1,10 @@
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import LandingView from './components/LandingView'
 import LoadingView from './components/LoadingView'
 import ResultView from './components/ResultView'
 import Header from './components/Header'
+import params from "./utils/params.json"
 
 function App() {
   const [currentView, updateView] = useState(0)
@@ -20,7 +21,7 @@ function App() {
   async function handleSubmitImage(formData){
     updateView(1)  // change to loading view
     console.log("Uploading Image...")
-    const response = await fetch("http://localhost:8000/extract", {
+    const response = await fetch(`${params.backend_base_url}/extract`, {
       method: "POST",
       body: formData
     })
