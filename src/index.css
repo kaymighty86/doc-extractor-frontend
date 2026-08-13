@@ -100,6 +100,8 @@ form button{
   padding: 0.5rem;
   position: fixed;
   top:0px;
+  background-color: var(--bg);
+  z-index: 3;
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
