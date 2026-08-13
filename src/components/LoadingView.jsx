@@ -3,8 +3,8 @@ import Panel from "./Panel"
 
 export default function LoadingView(){
     return (
-        <Panel className='loading_panel'>
-            <p>Understanding the document layout ...</p>
+        <Panel className='loading_panel mainwrapper'>
+            <p>Understanding the document's layout ...</p>
             <img src={loading_icon} className="loading_icon"/>
         </Panel>
     )

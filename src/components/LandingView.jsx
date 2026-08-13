@@ -29,13 +29,15 @@ export default function LandingView({onSubmitImage}){
     }
 
     return (
-        <Panel align="column">
+        <Panel align="column" className="mainwrapper">
+            <p style={{textAlign: "center"}}>Upload an Image Document to Retrieve the Formated Texts from the Image</p>
             <form className="upload_form" onSubmit={sumbitForm}>
                 <input className='image_upload' type="file" accept='image/*' name="file" onChange={handleImageSelected} required/>
                 <button>Retrieve Text & Layout</button>
             </form>
             {docUploaded.file && <div>
-                <OutputSection title="Your Document">
+                <p style={{textAlign: "center"}}>Click the Button Above ☝️ to start the process.</p>
+                <OutputSection title="Document Preview">
                     <img src={docUploaded.url}/>
                 </OutputSection>
             </div>}

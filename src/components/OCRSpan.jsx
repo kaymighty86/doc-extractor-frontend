@@ -1,4 +1,4 @@
-export default function OCRSpan({text = "", bbox = [], label=""}){
+export default function OCRSpan({text = "", bbox = [], image_width = 0, image_height = 0, label=""}){
     // Change the color and style of the text based on its label
     let additional_style
     switch (label){
@@ -24,8 +24,8 @@ export default function OCRSpan({text = "", bbox = [], label=""}){
     const style = {
         display: "inline-block",
         position: "absolute",
-        top: `${bbox[1]}px`,
-        left: `${bbox[0]}px`,
+        top: `${(bbox[1] / image_height) * 100}%`,  //convert the bbox to 0 - 100% of the parent element coordinate
+        left: `${(bbox[0] / image_width) * 100}%`,
         ...additional_style
     }
 
