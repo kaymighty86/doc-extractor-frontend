@@ -2,7 +2,7 @@ import Panel from "./Panel"
 import OutputSection from "./OutputSection";
 import { useState } from "react";
 
-export default function LandingView({onSubmitImage}){
+export default function LandingView({onSubmitImage, error}){
 
     const [docUploaded, setDocUploaded] = useState({
         file: undefined,
@@ -30,7 +30,8 @@ export default function LandingView({onSubmitImage}){
 
     return (
         <Panel align="column" className="mainwrapper">
-            <p style={{textAlign: "center"}}>Upload an Image Document to Retrieve the Formated Texts from the Image</p>
+            {error && <p className="error_toast">{error}</p>}
+            <p style={{textAlign: "center", padding: "0px 1rem"}}>Upload an Image Document to Retrieve the Formated Texts from the Image</p>
             <form className="upload_form" onSubmit={sumbitForm}>
                 <input className='image_upload' type="file" accept='image/*' name="file" onChange={handleImageSelected} required/>
                 <button>Retrieve Text & Layout</button>

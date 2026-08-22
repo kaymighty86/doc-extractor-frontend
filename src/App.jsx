@@ -9,6 +9,7 @@ import params from "./utils/params.json"
 function App() {
   const [currentView, updateView] = useState(0)
   const [responseData, setResponseData] = useState(undefined)
+  const [error, setError] = useState(undefined)
 
   // async function testBackend(){
   //   console.log("testing connection with backend...")
@@ -19,6 +20,7 @@ function App() {
   }
 
   async function handleSubmitImage(formData){
+    setError(undefined)  // reset error state
     updateView(1)  // change to loading view
     console.log("Uploading Image...")
     const response = await fetch(`${params.backend_base_url}/extract`, {
@@ -26,13 +28,15 @@ function App() {
       body: formData
     })
 
+    const data = await response.json()
+
     if(response.ok){
-      const data = await response.json()
       setResponseData(data)
       updateView(2)  // change to result view
     }
     else{
-      console.log("Error received from backend.")
+      console.log(`Error received from backend.\n${data.detail}`)
+      setError(data.detail)
       updateView(0)  // change back to landing view
     }
   }
@@ -40,7 +44,7 @@ function App() {
   return (
     <div>
       <Header onClickHome={handleClickHome}/>
-      {currentView == 0 && <LandingView onSubmitImage = {handleSubmitImage}/>}
+      {currentView == 0 && <LandingView onSubmitImage = {handleSubmitImage} error = {error}/>}
       {currentView == 1 && <LoadingView />}
       {currentView == 2 && <ResultView result={responseData}/>}
     </div>
